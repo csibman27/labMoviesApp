@@ -19,7 +19,7 @@ const MovieListPage: React.FC= () => {
     )
       .then((res) => res.json())
       .then((json) => {
-        //console.log(json)
+        console.log(json)
         return json.results;
       })
       .then((movies) => {
