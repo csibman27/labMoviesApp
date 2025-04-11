@@ -36,7 +36,9 @@ const MovieHeader: React.FC<MovieDetailsProps> = (movie) => {
 
   if (stored === "[]") {
     isFavourite = false
-  } 
+  } else {
+    console.log("Data is stored:", stored);
+  }
   
 
 
