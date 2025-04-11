@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Paper from "@mui/material/Paper";
@@ -8,6 +8,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import { MovieDetailsProps } from "../../types/interfaces";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Avatar from "@mui/material/Avatar";
+import { CardHeader, ListItem, ListItemText } from "@mui/material";
 
 const styles = {
     root: {  
@@ -16,17 +17,27 @@ const styles = {
     alignItems: "center",
     flexWrap: "wrap",
     padding: 1.5,
-    avatar: {
-      backgroundColor: "rgb(255, 0, 0)",
-    },
+  },
+  avatar: {
+    backgroundColor: "rgb(255, 0, 0)",
   },
 };
 
-interface MovieHeaderProps extends MovieDetailsProps {
+// [Hint: The only file you need to edit to complete this exercise is
+// components/headerMovie/index.tsx. The movies tagged as favourites are stored in localstorage, which any component can access.]
 
-}
 
-const MovieHeader: React.FC<MovieHeaderProps> = (movie) => {
+
+
+const MovieHeader: React.FC<MovieDetailsProps> = (movie) => {
+  
+  const stored = localStorage.getItem("favourites");
+  let isFavourite = true
+
+  if (stored === "[]") {
+    isFavourite = false
+  } 
+  
 
 
   return (
@@ -35,13 +46,11 @@ const MovieHeader: React.FC<MovieHeaderProps> = (movie) => {
         <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>
 
-
-      <Avatar sx={styles.avatar}>
-        <FavoriteIcon />
-      </Avatar>
-
-  
-
+      {isFavourite && <Avatar sx={styles.avatar}>
+                    <FavoriteIcon />
+                  </Avatar>}
+      
+    
       <Typography variant="h4" component="h3">
         {movie.title}{"   "}
         <a href={movie.homepage}>
