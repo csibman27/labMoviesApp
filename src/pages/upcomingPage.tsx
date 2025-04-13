@@ -49,7 +49,7 @@ const UpcomingPage: React.FC = () => {
 
   const movies = data ? data.results : [];
   const displayedMovies = filterFunction(movies);
-
+  // browser is already using the react-query library.
   return (
     <>
       <PageTemplate
