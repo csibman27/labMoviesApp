@@ -50,6 +50,14 @@ const UpcomingPage: React.FC = () => {
   const movies = data ? data.results : [];
   const displayedMovies = filterFunction(movies);
   // browser is already using the react-query library.
+
+  /* Hint: Add a new state variable (of type array) to the MoviesContext
+     for storing the ids of the movies tagged as ‘must watch’,
+     and add a function for updating this state variable.
+     Have a click event handler associated with the icon that calls the update function.
+     To confirm the feature is working, use console.log to output the content
+     of the new state variable array.
+  */
   return (
     <>
       <PageTemplate
