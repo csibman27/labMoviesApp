@@ -51,7 +51,6 @@ const MovieHeader: React.FC<MovieDetailsProps> = (movie) => {
       {isFavourite && <Avatar sx={styles.avatar}>
                     <FavoriteIcon />
                   </Avatar>}
-      
     
       <Typography variant="h4" component="h3">
         {movie.title}{"   "}
