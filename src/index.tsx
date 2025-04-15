@@ -4,8 +4,9 @@ import { BrowserRouter, Route, Navigate, Routes } from "react-router-dom";
 import HomePage from "./pages/homePage";
 import UpcomingPage from "./pages/upcomingPage";
 import PopularPage from "./pages/popularPage";
+import ActorsPage from "./pages/actorsPage";
 import MoviePage from "./pages/movieDetailsPage";
-import FavouriteMoviesPage from "./pages/favouriteMoviesPage"; // NEW
+import FavouriteMoviesPage from "./pages/favouriteMoviesPage";
 import MovieReviewPage from "./pages/movieReviewPage";
 import SiteHeader from './components/siteHeader';
 import { QueryClientProvider, QueryClient } from "react-query";
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/movies/upcoming" element={<UpcomingPage />} />
         <Route path="/movies/popular" element={<PopularPage />} />
+        <Route path="/movies/actors" element={<ActorsPage />} />
         <Route path="*" element={<Navigate to="/" />} />
         <Route path="/reviews/:id" element={<MovieReviewPage/>} />
         <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
