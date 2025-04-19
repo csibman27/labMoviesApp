@@ -19,10 +19,25 @@ export interface BaseMovieProps {
     genre_ids?: number[];
   }
 
+export interface BaseActorProps {
+   name: string,
+   original_name?: string, 
+   id: number,
+   popularity: number,
+   profile_path: string,
+   gender: number,
+
+}
+
 export interface BaseMovieListProps {
   movies: BaseMovieProps[];
   selectFavourite: (movieId: number) => void;
-} 
+}
+
+export interface BaseActorListProps {
+  actors: BaseActorProps[];
+  action: (a: BaseActorProps) => React.ReactNode;
+}
 
 export interface MovieDetailsProps extends BaseMovieProps {
   genres: {

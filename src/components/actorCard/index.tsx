@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import React from "react";
 import img from '../../images/film-poster-placeholder.png';
-import { BaseActorCardProps } from "../../types/interfaces";
+import { BaseActorProps } from "../../types/interfaces";
 
 const styles = {
     card: { maxWidth: 345 },
@@ -20,8 +20,8 @@ const styles = {
 
 
 interface ActorCardProps {
-  actor: BaseActorCardProps;
-  action?: (actor: BaseActorCardProps) => React.ReactNode;
+  actor: BaseActorProps;
+  action?: (actor: BaseActorProps) => React.ReactNode;
 }
 
 const ActorCard: React.FC<ActorCardProps> = ({ actor, action }) => {
@@ -53,7 +53,7 @@ const ActorCard: React.FC<ActorCardProps> = ({ actor, action }) => {
             Actor Bio
           </Button>
         </Link>
-        <Link to={`/movies/actors/${actor.id}/movies`}>
+        <Link to={`/movies/actor/${actor.id}/movies`}>
           <Button variant="outlined" size="medium" color="primary">
             Actor Movies
           </Button>

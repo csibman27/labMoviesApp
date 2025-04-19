@@ -1,7 +1,7 @@
 import React from "react";
 import ActorDetails from "../components/actorDetails";
 import PageTemplate from "../components/templateActorPage";
-import { getActorMovies } from "../api/tmdb-api";
+import { getActorsBio } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import { Link, useParams } from "react-router-dom";
@@ -12,7 +12,7 @@ const ActorBioPage: React.FC = () => {
   const { id } = useParams();
   const { data: actor, error, isLoading, isError } = useQuery<ActorDetailsProps, Error>(
     ["actors", id],
-  ()=> getActorMovies(id||"")
+  ()=> getActorsBio(id||"")
   );
 
 
