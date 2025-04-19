@@ -7,35 +7,29 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import React from "react";
 import img from '../../images/film-poster-placeholder.png';
+import { BaseActorCardProps } from "../../types/interfaces";
 
 const styles = {
     card: { maxWidth: 345 },
     media: { height: 500 },
+    objectFit: "cover",
     avatar: {
-      backgroundColor: "rgb(255, 0, 0)",
+      backgroundColor: "rgb(255, 255, 255)",
     },
   };
-  
-// Define the actor type
-interface Actor {
-  id: number;
-  name: string;
-  profile_path?: string;
-}
 
-// Define props for the component
+
 interface ActorCardProps {
-  actor: Actor;
-  action?: (actor: Actor) => React.ReactNode;
+  actor: BaseActorCardProps;
+  action?: (actor: BaseActorCardProps) => React.ReactNode;
 }
 
-// Functional component
 const ActorCard: React.FC<ActorCardProps> = ({ actor, action }) => {
 
   return (
     <Card sx={styles.card}>
       <CardHeader
-        sx={styles.header}
+        sx={styles.avatar}
         title={
           <Typography variant="h5" component="p">
             {actor.name}{" "}

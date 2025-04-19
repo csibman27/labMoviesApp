@@ -81,4 +81,10 @@ export interface Review {
   movieId: number,
 }
 
+export interface BaseActorCardProps {
+  id: number;
+  name: string;
+  profile_path?: string;
+}
+
 
