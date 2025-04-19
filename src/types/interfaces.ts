@@ -21,7 +21,7 @@ export interface BaseMovieProps {
 
 export interface BaseMovieListProps {
   movies: BaseMovieProps[];
-  selectFavourite: (movieId: number) => void;  //added
+  selectFavourite: (movieId: number) => void;
 } 
 
 export interface MovieDetailsProps extends BaseMovieProps {
@@ -33,7 +33,7 @@ export interface MovieDetailsProps extends BaseMovieProps {
 
 export interface MovieImage {
   file_path: string;
-  aspect_ratio?: number; //some props are optional...
+  aspect_ratio?: number;
   height?: number;
   iso_639_1?: string;
   vote_average?: number;
@@ -84,7 +84,32 @@ export interface Review {
 export interface BaseActorCardProps {
   id: number;
   name: string;
+  gender?: number;
+  known_for_department?: String;
+  popularity?: number; 
   profile_path?: string;
+  biography?: string;
+}
+
+export interface ActorPageProps {
+  actor: ActorDetailsProps[];
 }
 
 
+export interface ActorDetailsProps extends BaseActorCardProps {
+  known_for: {
+    id: number;
+    title: string;
+  }[];
+}
+
+export interface ActorImage {
+  poster_path: string;
+  aspect_ratio?: number;
+  height?: number;
+  iso_639_1?: string;
+  vote_average?: number;
+  vote_count?: number;
+  width?: number;
+  profile_path?: string;
+}

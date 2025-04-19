@@ -4,10 +4,13 @@ import { getActors } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 
-
+type Actor = {
+  id: string;
+  name: string;
+};
 
 const ActorsPage: React.FC = () => {
-  const { data, error, isLoading, isError } = useQuery<Error>("actors", getActors);
+  const { data, error, isLoading, isError } = useQuery<{ results: Actor[] }, Error>("actors", getActors);
 
   console.log("Actor data", data);
 
@@ -16,20 +19,19 @@ const ActorsPage: React.FC = () => {
   }
 
   if (isError) {
-    return <h1>{error.message}</h1>;
+    return <h1>{(error as Error).message}</h1>;
   }
 
-
-  const actors = data.results.map((actor) => {
-    return actor;
-  });
+  const actors = data?.results ?? [];
 
   return (
     <>
       <PageTemplate
         title="Discover Actors"
         actors={actors}
-        action={(actor) => {null}}
+        action={(actor) => {
+          //console.log(actor)
+        }}
       />
     </>
   );

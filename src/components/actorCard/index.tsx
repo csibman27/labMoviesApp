@@ -31,7 +31,8 @@ const ActorCard: React.FC<ActorCardProps> = ({ actor, action }) => {
       <CardHeader
         sx={styles.avatar}
         title={
-          <Typography variant="h5" component="p">
+          <Typography
+            variant="h5" component="p">
             {actor.name}{" "}
           </Typography>
         }
@@ -47,12 +48,12 @@ const ActorCard: React.FC<ActorCardProps> = ({ actor, action }) => {
       />
       <CardActions disableSpacing>
         {action && action(actor)}
-        <Link to={`/actor/${actor.id}`}>
+        <Link to={`/movies/actors/${actor.id}`}>
           <Button variant="outlined" size="medium" color="primary">
             Actor Bio
           </Button>
         </Link>
-        <Link to={`/actor/${actor.id}/movies`}>
+        <Link to={`/movies/actors/${actor.id}/movies`}>
           <Button variant="outlined" size="medium" color="primary">
             Actor Movies
           </Button>
