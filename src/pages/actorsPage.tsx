@@ -22,7 +22,7 @@ const ActorsPage: React.FC = () => {
     return <h1>{(error as Error).message}</h1>;
   }
 
-  const actors = data?.results ?? [];
+  const actors = data ?.results ?? [];
 
   return (
     <>

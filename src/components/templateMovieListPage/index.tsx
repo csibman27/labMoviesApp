@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../headerMovieList";
 import Grid from "@mui/material/Grid";
 import MovieList from "../movieList";
-import {  MovieListPageTemplateProps } from "../../types/interfaces";
+import {  BaseMovieListProps } from "../../types/interfaces";
 
 const styles = {
   root: { 
@@ -10,14 +10,16 @@ const styles = {
   }
 };
 
-const MovieListPageTemplate: React.FC<MovieListPageTemplateProps> = ({ movies, title, action })=> {
+const MovieListPageTemplate: React.FC<BaseMovieListProps> = ({ movies, title, action })=> {
   return (
     <Grid container sx={styles.root}>
       <Grid item xs={12}>
         <Header title={title} />
       </Grid>
       <Grid item container spacing={5}>
-      <MovieList action={action} movies={movies}></MovieList>
+      <MovieList action={action} movies={movies} selectFavourite={function (movieId: number): void {
+          throw new Error("Function not implemented.");
+        } }></MovieList>
       </Grid>
     </Grid>
   );

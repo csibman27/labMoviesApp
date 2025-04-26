@@ -128,3 +128,27 @@ export interface ActorImage {
   width?: number;
   profile_path?: string;
 }
+
+// SERIES
+
+export interface SeriesProps {
+  id: number;
+  name: string;
+  poster_path: string | null;
+  overview: string;
+  first_air_date: string;
+  vote_average: number;
+};
+
+export interface DiscoverSeries {
+  page: number;	
+  total_pages: number;
+  total_results: number;
+  results: SeriesProps[];
+}
+
+export interface SeriesProps {
+  name: string;
+  series: SeriesProps[];
+  action: (s: SeriesProps) => React.ReactNode;
+};
