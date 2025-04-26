@@ -3,7 +3,7 @@ import PageTemplate from '../components/templateSeriesListPage';
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import { getTVSeries } from "../api/tmdb-api";
-import { DiscoverSeries } from "../types/interfaces";
+import { DiscoverSeries, SeriesProps } from "../types/interfaces";
 
 
 const TvSeriesPage: React.FC = () => {
@@ -25,10 +25,10 @@ const TvSeriesPage: React.FC = () => {
   return (
     <>
       <PageTemplate
-        title="series"
+        title="TV Series"
         series={series}
-        action={(series) => {
-            // console.log(series)
+        action={(series: SeriesProps) => {
+            null
         }}
       />
 
