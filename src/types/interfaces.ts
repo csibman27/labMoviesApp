@@ -1,3 +1,5 @@
+// MOVIES
+
 export interface BaseMovieProps {
     title: string;
     budget: number;
@@ -34,10 +36,6 @@ export interface BaseMovieListProps {
   selectFavourite: (movieId: number) => void;
 }
 
-export interface BaseActorListProps {
-  actors: BaseActorProps[];
-  action: (a: BaseActorProps) => React.ReactNode;
-}
 
 export interface MovieDetailsProps extends BaseMovieProps {
   genres: {
@@ -96,6 +94,14 @@ export interface Review {
   movieId: number,
 }
 
+// ACTOR
+
+export interface BaseActorListProps {
+  actors: BaseActorProps[];
+  action: (a: BaseActorProps) => React.ReactNode;
+}
+
+
 export interface BaseActorCardProps {
   id: number;
   name: string;
@@ -132,12 +138,18 @@ export interface ActorImage {
 // SERIES
 
 export interface SeriesProps {
+  title: string;
   id: number;
   name: string;
   poster_path: string | null;
   overview: string;
   first_air_date: string;
   vote_average: number;
+  vote_count: number;
+  revenue: number;
+  runtime: number;
+  homepage: string | undefined;
+  tagline: string;
 };
 
 export interface DiscoverSeries {
@@ -152,3 +164,10 @@ export interface SeriesProps {
   series: SeriesProps[];
   action: (s: SeriesProps) => React.ReactNode;
 };
+
+export interface SeriesDetailsProps extends SeriesProps {
+  genres: {
+    id: number;
+    name: string;
+  }[];
+}

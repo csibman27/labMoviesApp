@@ -16,6 +16,7 @@ import AddMovieReviewPage from './pages/addMovieReviewPage';
 import ActorsBioPage from "./pages/actorsBioPage";
 import ActorMoviePage from "./pages/actorMoviePage";
 import TvSeriesPage from "./pages/tvSeriesPage";
+import TvSeriesDetailsPage from "./pages/tvSeriesDetailsPage";
 
 
 const queryClient = new QueryClient({
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/movies/upcoming" element={<UpcomingPage />} />
         <Route path="/movies/popular" element={<PopularPage />} />
         <Route path="/movies/tvseries" element={<TvSeriesPage />} />
+        <Route path="/movies/tvseries/:id" element={<TvSeriesDetailsPage />} />
         <Route path="/movies/actors" element={<ActorsPage />} />
         <Route path="/movies/actors/:id" element={<ActorsBioPage/>} />
         <Route path="/movies/actors/:id/movies" element={<ActorMoviePage/>} />
