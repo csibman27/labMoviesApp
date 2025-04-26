@@ -29,7 +29,6 @@ const ActorBioPage: React.FC = () => {
       {actor ? (
         <>
           <PageTemplate actor={actor}>
-            <p>WTF</p>
             <ActorDetails actor={actor} />
             <Link to={`/movies/actor/${actor.id}/movies`}>
               <Button variant="contained" size="large" color="success">
