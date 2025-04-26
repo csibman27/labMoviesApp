@@ -4,10 +4,12 @@ import { getActorMovies } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import { useParams } from "react-router-dom";
+import { ActorDetailsProps } from "../types/interfaces";
+
 
 const ActorMoviePage: React.FC = () => {
   const { id } = useParams();
-  const { data: actor, error, isLoading, isError } = useQuery<ActorDetailsProps, Error>(
+  const { data: cast, error, isLoading, isError } = useQuery<ActorDetailsProps, Error>(
     ["actor movies", id],
   ()=> getActorMovies(id||"")
   );
@@ -21,23 +23,19 @@ const ActorMoviePage: React.FC = () => {
     return <h1>{(error as Error).message}</h1>;
   }
 
+  console.log(cast)
+  
   return (
-    <>
-      {actor ? (
-        <>
-          <PageTemplate actor={actor}>
-            <ActorDetails actor={actor} />
-            <Link to={`/movies/actor/${actor.id}/movies`}>
-              <Button variant="contained" size="large" color="success">
-                {actor.name}'s Movies ...
-              </Button>
-            </Link>
+  
+          <PageTemplate
+            title="Actor Movies Page"
+            cast={cast}>
+              
+            
+    
           </PageTemplate>
-        </>
-      ) : (
-        <p>Waiting for actor details</p>
-      )}
-    </>
+    
+    // <p>This is the actors movie page</p>
   );
 };
 

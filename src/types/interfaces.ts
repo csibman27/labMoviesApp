@@ -38,6 +38,7 @@ export interface BaseMovieListProps {
 
 
 export interface MovieDetailsProps extends BaseMovieProps {
+  results: any;
   genres: {
     id: number;
     name: string;
@@ -167,6 +168,64 @@ export interface SeriesProps {
 
 export interface SeriesDetailsProps extends SeriesProps {
   genres: {
+    id: number;
+    name: string;
+  }[];
+}
+
+// CASTS
+
+export interface CastMemberProps {
+  adult: boolean;
+  id: number;
+  original_language: string;
+  backdrop_path?: string;
+  poster_path?: string;
+  title: string;
+  
+}
+
+export interface CrewMember {
+  adult: boolean;
+  backdrop_path?: string;
+  id: number;
+  title: string;
+  job: string;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path?: string;
+  release_date: string;
+  vote_average: number;
+  vote_count: number;
+}
+
+export interface CastMember {
+  adult: boolean;
+  backdrop_path?: string;
+  id: number;
+  title: string;
+  character: string;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path?: string;
+  release_date: string;
+  vote_average: number;
+  vote_count: number;
+}
+
+export interface CreditsResponse {
+  cast: CastMember[];
+  crew: CrewMember[];
+  id: number;
+}
+
+export interface CastDetailsProps extends CastMemberProps {
+  results: any;
+  cast: {
     id: number;
     name: string;
   }[];

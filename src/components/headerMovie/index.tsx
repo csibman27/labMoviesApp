@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Paper from "@mui/material/Paper";
@@ -25,21 +25,20 @@ const styles = {
 // [Hint: The only file you need to edit to complete this exercise is
 // components/headerMovie/index.tsx. The movies tagged as favourites are stored in localstorage, which any component can access.]
 
+interface MovieHeaderProps extends MovieDetailsProps {
+  customTitle?: string;
+}
 
 
-
-const MovieHeader: React.FC<MovieDetailsProps> = (movie) => {
-  
+const MovieHeader: React.FC<MovieHeaderProps> = ({ title, homepage, tagline, customTitle }) => {
   const stored = localStorage.getItem("favourites");
-  let isFavourite = true
+  let isFavourite = true;
 
   if (stored === "[]") {
-    isFavourite = false
+    isFavourite = false;
   } else {
     console.log("Data is stored:", stored);
   }
-  
-
 
   return (
     <Paper component="div" sx={styles.root}>
@@ -47,17 +46,21 @@ const MovieHeader: React.FC<MovieDetailsProps> = (movie) => {
         <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>
 
-      {isFavourite && <Avatar sx={styles.avatar}>
-                    <FavoriteIcon />
-                  </Avatar>}
-    
+      {isFavourite && (
+        <Avatar sx={styles.avatar}>
+          <FavoriteIcon />
+        </Avatar>
+      )}
+
       <Typography variant="h4" component="h3">
-        {movie.title}{"   "}
-        <a href={movie.homepage}>
-          <HomeIcon color="primary"  fontSize="large"/>
-        </a>
+        {customTitle ?? title}{"   "}
+        {homepage && (
+          <a href={homepage}>
+            <HomeIcon color="primary" fontSize="large" />
+          </a>
+        )}
         <br />
-        <span>{`${movie.tagline}`} </span>
+        <span>{tagline}</span>
       </Typography>
 
       <IconButton aria-label="go forward">

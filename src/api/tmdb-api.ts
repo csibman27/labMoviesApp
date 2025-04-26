@@ -149,6 +149,7 @@ export const getMovie = (id: string) => {
       if (!response.ok) {
         throw new Error(`Failed to get actor movies data. Response status: ${response.status}`);
       }
+      //console.log(response.json());
       return response.json();
     })
     .catch((error) => {

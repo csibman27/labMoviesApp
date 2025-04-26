@@ -1,12 +1,12 @@
-import React from "react";
-import ActorHeader from "../headerActor";
+import MovieHeader from "../headerMovie";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { getActorImages } from "../../api/tmdb-api";
-import { ActorDetailsProps } from "../../types/interfaces";
+import { getActorMovies } from "../../api/tmdb-api";
+import { CastDetailsProps, CreditsResponse } from "../../types/interfaces";
 import { useQuery } from "react-query";
 import Spinner from '../spinner';
+import { useParams } from "react-router-dom";
 
 const styles = {
     gridListRoot: {
@@ -20,17 +20,19 @@ const styles = {
     },
 };
 
-interface TemplateActorPageProps {
-    actor: ActorDetailsProps;
-    // children: React.ReactElement;
+interface TemplateCastPageProps {
+    cast: CastDetailsProps;
+    children: React.ReactElement;
 }
 
 
-const TemplateActorPage: React.FC<TemplateActorPageProps> = ({actor}) => {
-    const { data, error, isLoading, isError } = useQuery<Error>(
-        ["actor_images", actor.id],
-        () => getActorImages(actor.id.toString())
-    );
+const TemplateActorMoviePage: React.FC<TemplateCastPageProps> = ({cast, children}) => {
+    const { id } = useParams();
+    const { data: casts, error, isLoading, isError } = useQuery<CreditsResponse, Error>(
+        ["actor_movies", id],
+      ()=> getActorMovies(id||"")
+      );
+    
 
     if (isLoading) {
         return <Spinner />;
@@ -40,35 +42,45 @@ const TemplateActorPage: React.FC<TemplateActorPageProps> = ({actor}) => {
         return <h1>{(error).message}</h1>;
     }
 
+    const m1 = cast ? cast.results : [];
+
     return (
         <>
-            <ActorHeader {...actor} />
+            <MovieHeader {...cast} />
+
+            
+
+
+
+            
+            
+            <p>test</p>
+            <p>{casts?.original_language}</p>
+            <p>{cast.original_language}</p>
+            <p>{m1}</p>
 
             <Grid container spacing={5} style={{ padding: "15px" }}>
                 <Grid item xs={3}>
                     <div>
-                        <ImageList cols={1}>
-                                <ImageListItem
-                                    key={actor.profile_path}
-                                    sx={styles.gridListTile}
-                                    cols={1}
-                                >
-                                    <img
-                                        src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
-                                        alt={'Image alternative'}
-                                    />
-                                </ImageListItem>
-                        </ImageList>
+                    {casts?.cast.map((movie) => (
+                        <div key={movie.id}>
+                            <p><strong>{movie.title}</strong> as {movie.character}</p>
+                            <img
+                            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                            alt={movie.title}
+                            />
+                        </div>
+                        ))}
+                 
                     </div>
                 </Grid>
 
                 <Grid item xs={9}>
-                    {/* {children} */}
-                <p>{actor.biography || 'Biography not available.'}</p>  
+                    {children}
                 </Grid>
             </Grid>
         </>
     );
 };
 
-export default TemplateActorPage;
+export default TemplateActorMoviePage;
