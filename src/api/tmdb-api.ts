@@ -97,9 +97,9 @@ export const getMovie = (id: string) => {
   };
 
 
-  export const getActors = () => {
+  export const getActors = (currentPage: number) => {
     return fetch(
-      `https://api.themoviedb.org/3/person/popular?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/person/popular?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=${currentPage}`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(`Failed to get actors data. Response status: ${response.status}`);

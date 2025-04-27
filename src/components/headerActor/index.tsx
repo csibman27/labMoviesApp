@@ -29,11 +29,6 @@ const ActorHeader: React.FC<ActorDetailsProps> = (actor) => {
     
       <Typography variant="h4" component="h3">
         {actor.name}{"   "}
-        {/* <a href={actor.website}>
-          <HomeIcon color="primary"  fontSize="large"/>
-        </a> */}
-        <br />
-        {/* <span>{`${actor.place_of_birth}`} </span> */}
       </Typography>
 
       <IconButton aria-label="go forward">

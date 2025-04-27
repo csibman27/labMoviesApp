@@ -24,7 +24,7 @@ const ActorMoviePage: React.FC = () => {
     return <h1>{(error as Error).message}</h1>;
   }
 
-  console.log(cast)
+  // console.log(cast)
   
   return (
   

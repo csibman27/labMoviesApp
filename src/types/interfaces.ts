@@ -120,8 +120,16 @@ export interface ActorPageProps {
   actor: ActorDetailsProps;
 }
 
+export interface DiscoverActors {
+  page: number;	
+  total_pages: any;
+  total_results: number;
+  results: BaseActorProps[];
+}
+
 
 export interface ActorDetailsProps extends BaseActorCardProps {
+  place_of_birth: any;
   genres: {
     id: number;
     title: string;
