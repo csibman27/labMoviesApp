@@ -17,26 +17,45 @@ const styles = {
 
 interface HeaderProps {
     title: string;
+    currentPage: number;
+    setCurrentPage: (page: number) => void;
+    totalPages: number;
 }
 
-const Header: React.FC<HeaderProps> = (headerProps) => {
-    const title = headerProps.title
+const Header: React.FC<HeaderProps> = ({ title, currentPage, setCurrentPage, totalPages }) => {
+
+    const handleGoBack = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const handleGoForward = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
 
     return (
         <Paper component="div" sx={styles.root}>
-            <IconButton
-                aria-label="go back"
+            <IconButton 
+                disabled={currentPage === 1} 
+                aria-label="go back" 
+                onClick={handleGoBack}
             >
-                <ArrowBackIcon color="primary" fontSize="large" />
+                <ArrowBackIcon color={currentPage === 1 ? "disabled" : "primary"} fontSize="large" />
             </IconButton>
 
             <Typography variant="h4" component="h3">
                 {title}
             </Typography>
-            <IconButton
-                aria-label="go forward"
+
+            <IconButton 
+                disabled={currentPage === totalPages} 
+                aria-label="go forward" 
+                onClick={handleGoForward}
             >
-                <ArrowForwardIcon color="primary" fontSize="large" />
+                <ArrowForwardIcon color={currentPage === totalPages ? "disabled" : "primary"} fontSize="large" />
             </IconButton>
         </Paper>
     );
