@@ -7,6 +7,7 @@ import { DiscoverSeries, SeriesProps } from "../types/interfaces";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
+  languageFilter,
 } from "../components/movieFilterUI";
 import useFiltering from "../hooks/useFiltering";
 
@@ -20,11 +21,22 @@ const genreFiltering = {
   value: "0",
   condition: genreFilter,
 };
+const languageFiltering = {
+  name: "language",
+  value: "all",
+  condition: languageFilter,
+};
 
 const TvSeriesPage: React.FC = () => {
 
   const [ currentPage, setCurrentPage ] = useState(1);
-  const { data, error, isLoading, isError } = useQuery<DiscoverSeries, Error>(["series", { currentPage }],
+
+  const { filterValues, setFilterValues, filterFunction } = useFiltering(
+    [titleFiltering, genreFiltering, languageFiltering,]
+  );
+
+  const { data, error, isLoading, isError } = useQuery<DiscoverSeries, Error>(
+    ["series", { currentPage, filters: filterValues }],
     ()=> getTVSeries(currentPage),
     {
       keepPreviousData: true,
@@ -35,10 +47,6 @@ const TvSeriesPage: React.FC = () => {
     setCurrentPage(newPage); 
   };
 
-  const { filterValues, setFilterValues, filterFunction } = useFiltering(
-    [titleFiltering, genreFiltering]
-  );
-
   if (isLoading) {
     return <Spinner />;
   }
@@ -48,11 +56,9 @@ const TvSeriesPage: React.FC = () => {
   }
 
   const changeFilterValues = (type: string, value: string) => {
-    const changedFilter = { name: type, value: value };
-    const updatedFilterSet =
-      type === "title"
-        ? [changedFilter, filterValues[1]]
-        : [filterValues[0], changedFilter];
+    const updatedFilterSet = filterValues.map((f) =>
+      f.name === type ? { ...f, value } : f
+    );
     setFilterValues(updatedFilterSet);
   };
 
@@ -76,6 +82,7 @@ const TvSeriesPage: React.FC = () => {
         onFilterValuesChange={changeFilterValues}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
+        languageFilter={filterValues[2].value}
       />
     </>
     // console.log(series)

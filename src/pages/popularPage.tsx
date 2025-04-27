@@ -5,6 +5,7 @@ import { getPopularMovies } from "../api/tmdb-api";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
+  languageFilter,
 } from "../components/movieFilterUI";
 import useFiltering from "../hooks/useFiltering";
 import { DiscoverMovies } from "../types/interfaces";
@@ -23,10 +24,20 @@ const genreFiltering = {
   value: "0",
   condition: genreFilter,
 };
+const languageFiltering = {
+  name: "language",
+  value: "all",
+  condition: languageFilter,
+};
 
 const PopularPage: React.FC = () => {
   const [ currentPage, setCurrentPage ] = useState(1);
-  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>(["popular-movies", { currentPage }],
+
+  const { filterValues, setFilterValues, filterFunction } = useFiltering(
+    [titleFiltering, genreFiltering, languageFiltering,]
+  );
+
+  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>(["popular-movies", { currentPage, filters: filterValues }],
     ()=> getPopularMovies(currentPage),
     {
       keepPreviousData: true,
@@ -37,10 +48,6 @@ const PopularPage: React.FC = () => {
     setCurrentPage(newPage); 
   };
 
-  const { filterValues, setFilterValues, filterFunction } = useFiltering(
-    [titleFiltering, genreFiltering]
-  );
-
   if (isLoading) {
     return <Spinner />;
   }
@@ -50,11 +57,9 @@ const PopularPage: React.FC = () => {
   }
 
   const changeFilterValues = (type: string, value: string) => {
-    const changedFilter = { name: type, value: value };
-    const updatedFilterSet =
-      type === "title"
-        ? [changedFilter, filterValues[1]]
-        : [filterValues[0], changedFilter];
+    const updatedFilterSet = filterValues.map((f) =>
+      f.name === type ? { ...f, value } : f
+    );
     setFilterValues(updatedFilterSet);
   };
 
@@ -83,6 +88,7 @@ const PopularPage: React.FC = () => {
         onFilterValuesChange={changeFilterValues}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
+        languageFilter={filterValues[2].value}
       />
     </>
   );

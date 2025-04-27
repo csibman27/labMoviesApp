@@ -41,6 +41,7 @@ const languageOptions = [
   { code: "fr", name: "French" },
   { code: "de", name: "German" },
   { code: "ja", name: "Japanese" },
+  { code: "hu", name: "Hungarian"},
 ];
 
 const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreFilter, languageFilter, onUserInput }) => {
