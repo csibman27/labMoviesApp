@@ -19,18 +19,17 @@ const styles = {
   },
 };
 
-interface MovieCardProps  {
+interface MovieCardProps {
   movie: BaseFantasyMovieProps;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({movie}) => { 
-
+const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   return (
     <Card sx={styles.card}>
       <CardHeader
         title={
           <Typography variant="h5" component="p">
-            {/* {movie.title}{" "} */}
+            {movie.title}
           </Typography>
         }
       />
@@ -38,28 +37,29 @@ const MovieCard: React.FC<MovieCardProps> = ({movie}) => {
         sx={styles.media}
         image={
           movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-            : img
+            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` 
+            : img 
         }
+        title={movie.title}
       />
       <CardContent>
         <Grid container>
           <Grid item xs={6}>
             <Typography variant="h6" component="p">
               <CalendarIcon fontSize="small" />
-              {/* {movie.release_date} */}
+              {movie.release_date}
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="h6" component="p">
               <StarRateIcon fontSize="small" />
-              {/* {"  "} {movie.vote_average}{" "} */}
+              {movie.vote_average}
             </Typography>
           </Grid>
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-      
+        {/* any actions if needed */}
       </CardActions>
     </Card>
   );

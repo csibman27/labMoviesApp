@@ -1,29 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import PageTemplate from "../components/templateFantasyMovieListPage";
+import { fantasyMovies } from "../seed/fantasyMovies";
+import MovieForm from "../components/fantasyMovieForm";
 import { BaseFantasyMovieProps } from "../types/interfaces";
-import Spinner from "../components/spinner";
-import { useQuery } from "react-query";
-
-
 
 const FantasyPage: React.FC = () => {
+  const [movies, setMovies] = useState<BaseFantasyMovieProps[]>(fantasyMovies);
 
-const { error, isLoading, isError } = useQuery<Error>
-const fantasyMovies: BaseFantasyMovieProps[] = [];
-
-
-  if (isLoading) return <Spinner />;
-  if (isError) return <h1>{error.message}</h1>;
+  // Function to handle new movie submission
+  const handleAddMovie = (movie: BaseFantasyMovieProps) => {
+    setMovies((prevMovies) => [...prevMovies, movie]);
+  };
 
   return (
-    <>
+    <div>
+      <h1>Fantasy Movies</h1>
+      <MovieForm onSubmit={handleAddMovie} />  {/* Form to add new movie */}
       <PageTemplate
-       title="Fantasy Movies"
-       movies={fantasyMovies}
-       action={(movie) => <></>}
-       />
-    </>
+        title="Fantasy Movies"
+        movies={movies}
+        action={(movie) => <></>}
+      />
+    </div>
   );
 };
 
 export default FantasyPage;
+
