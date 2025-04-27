@@ -5,6 +5,7 @@ import { getUpcomingMovies } from "../api/tmdb-api";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
+  languageFilter,
 } from "../components/movieFilterUI";
 import useFiltering from "../hooks/useFiltering";
 import { DiscoverMovies } from "../types/interfaces";
@@ -23,10 +24,23 @@ const genreFiltering = {
   value: "0",
   condition: genreFilter,
 };
+const languageFiltering = {
+  name: "language",
+  value: "all",
+  condition: languageFilter,
+};
+
+
 
 const UpcomingPage: React.FC = () => {
   const [ currentPage, setCurrentPage ] = useState(1);
-  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>(["movie", { currentPage }],
+
+  const { filterValues, setFilterValues, filterFunction } = useFiltering(
+    [titleFiltering, genreFiltering, languageFiltering]
+  );
+
+  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>(
+    ["movie", { currentPage, filters: filterValues }],
     ()=> getUpcomingMovies(currentPage),
     {
       keepPreviousData: true,
@@ -37,9 +51,12 @@ const UpcomingPage: React.FC = () => {
     setCurrentPage(newPage); 
   };
 
-  const { filterValues, setFilterValues, filterFunction } = useFiltering(
-    [titleFiltering, genreFiltering]
-  );
+  const changeFilterValues = (type: string, value: string) => {
+    const updatedFilterSet = filterValues.map((f) =>
+      f.name === type ? { ...f, value } : f
+    );
+    setFilterValues(updatedFilterSet);
+  };
 
   if (isLoading) {
     return <Spinner />;
@@ -49,28 +66,11 @@ const UpcomingPage: React.FC = () => {
     return <h1>{error.message}</h1>;
   }
 
-  const changeFilterValues = (type: string, value: string) => {
-    const changedFilter = { name: type, value: value };
-    const updatedFilterSet =
-      type === "title"
-        ? [changedFilter, filterValues[1]]
-        : [filterValues[0], changedFilter];
-    setFilterValues(updatedFilterSet);
-  };
-
   const movies = data ? data.results : [];
   const totalPages = data?.total_pages;
   // console.log(totalPages)
   const displayedMovies = filterFunction(movies);
-  // browser is already using the react-query library.
-
-  /* Hint: Add a new state variable (of type array) to the MoviesContext
-     for storing the ids of the movies tagged as ‘must watch’,
-     and add a function for updating this state variable.
-     Have a click event handler associated with the icon that calls the update function.
-     To confirm the feature is working, use console.log to output the content
-     of the new state variable array.
-  */
+  
   return (
     <>
       <PageTemplate
@@ -92,6 +92,7 @@ const UpcomingPage: React.FC = () => {
         onFilterValuesChange={changeFilterValues}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
+        languageFilter={filterValues[2].value}
       />
     </>
   );

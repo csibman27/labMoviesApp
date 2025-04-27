@@ -6,7 +6,7 @@ import { BaseMovieProps } from "../../types/interfaces";
 
 // Updated to support both movies (title) and series (name)
 export const titleFilter = (item: BaseMovieProps, value: string): boolean => {
-  const title = item.title || item.name || ""; // fallback if both undefined
+  const title = item.title || item.name || ""; // fallback if both undefined, needed this to filter series
   return title.toLowerCase().includes(value.toLowerCase());
 };
 

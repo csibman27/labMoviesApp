@@ -5,7 +5,7 @@ import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
-  languageFilter,  // Import languageFilter
+  languageFilter,
 } from "../components/movieFilterUI";
 import { BaseMovieProps, DiscoverMovies } from "../types/interfaces";
 import { useQuery } from "react-query";
@@ -37,7 +37,7 @@ const HomePage: React.FC = () => {
   const { filterValues, setFilterValues, filterFunction } = useFiltering([
     titleFiltering,
     genreFiltering,
-    languageFiltering,  // Include languageFiltering in useFiltering
+    languageFiltering,
   ]);
 
   const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>(
@@ -66,6 +66,7 @@ const HomePage: React.FC = () => {
   const movies = data ? data.results : [];
   const totalPages = data?.total_pages;
   const displayedMovies = filterFunction(movies);
+  // console.log(movies)
 
   return (
     <>
