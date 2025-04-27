@@ -112,6 +112,8 @@ export interface BaseActorCardProps {
   profile_path?: string;
   biography?: string;
   birthday?: string;
+  awards: string;
+  imdb_id: number;
 }
 
 export interface ActorPageProps {

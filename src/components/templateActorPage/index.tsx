@@ -7,8 +7,6 @@ import { getActorImages } from "../../api/tmdb-api";
 import { ActorDetailsProps } from "../../types/interfaces";
 import { useQuery } from "react-query";
 import Spinner from '../spinner';
-import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
 
 const styles = {
     gridListRoot: {
@@ -65,13 +63,7 @@ const TemplateActorPage: React.FC<TemplateActorPageProps> = ({actor, children}) 
                 </Grid>
 
                 <Grid item xs={9}>
-                    {children}
-                {/* <p>{actor.biography || 'Biography not available.'}</p> */}
-                <Link to={`/movies/actor/${actor.id}/movies`}>
-                              <Button variant="contained" size="large" color="success">
-                                {actor.name}'s Movies ...
-                              </Button>
-                </Link>  
+                    {children || 'Biography not available.' }
                 </Grid>
             </Grid>
         </>
