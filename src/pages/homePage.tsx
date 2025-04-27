@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { getMovies } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
@@ -24,7 +24,19 @@ const genreFiltering = {
 };
 
 const HomePage: React.FC = () => {
-  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>("discover", getMovies);
+  
+  const [ currentPage, setCurrentPage ] = useState(1);
+  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>(["discover", { currentPage }],
+    () => getMovies(currentPage),
+    {
+      keepPreviousData: true,
+    }
+  );
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage); 
+  };
+
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [titleFiltering, genreFiltering]
   );
@@ -37,7 +49,6 @@ const HomePage: React.FC = () => {
     return <h1>{error.message}</h1>;
   }
 
-
   const changeFilterValues = (type: string, value: string) => {
     const changedFilter = { name: type, value: value };
     const updatedFilterSet =
@@ -48,13 +59,16 @@ const HomePage: React.FC = () => {
   };
 
   const movies = data ? data.results : [];
-  // console.log(movies)
+  const totalPages = data?.total_pages; // Extract totalPages from the data
   const displayedMovies = filterFunction(movies);
 
   return (
     <>
       <PageTemplate
         title="Discover Movies"
+        setCurrentPage={handlePageChange}
+        currentPage={currentPage}
+        totalPages={totalPages} // Pass totalPages to PageTemplate
         movies={displayedMovies}
         action={(movie: BaseMovieProps) => {
           return <AddToFavouritesIcon {...movie} />
@@ -68,4 +82,5 @@ const HomePage: React.FC = () => {
     </>
   );
 };
+
 export default HomePage;

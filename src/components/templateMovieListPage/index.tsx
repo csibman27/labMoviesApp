@@ -10,16 +10,35 @@ const styles = {
   }
 };
 
-const MovieListPageTemplate: React.FC<BaseMovieListProps> = ({ movies, title, action })=> {
+
+interface MovieListPageTemplateProps extends BaseMovieListProps {
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
+  totalPages: number;
+}
+
+const MovieListPageTemplate: React.FC<MovieListPageTemplateProps> = ({
+  movies,
+  title,
+  action,
+  currentPage,
+  setCurrentPage,
+  totalPages
+})=> {
+  
   return (
     <Grid container sx={styles.root}>
       <Grid item xs={12}>
-        <Header title={title} />
+        <Header
+          title={title}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={totalPages}        />
       </Grid>
       <Grid item container spacing={5}>
-      <MovieList action={action} movies={movies} selectFavourite={function (): void {
+      <MovieList action={action} movies={movies} selectFavourite={function (movieId: number): void {
           throw new Error("Function not implemented.");
-        } }></MovieList>
+        } } />
       </Grid>
     </Grid>
   );
