@@ -1,84 +1,57 @@
-import React, { useState } from "react";
+import React from "react";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import MonetizationIcon from "@mui/icons-material/MonetizationOn";
-import StarRate from "@mui/icons-material/StarRate";
 import Typography from "@mui/material/Typography";
 import { ActorDetailsProps } from "../../types/interfaces";
-import NavigationIcon from "@mui/icons-material/Navigation";
-import Fab from "@mui/material/Fab";
-import Drawer from "@mui/material/Drawer";
+import { Cake, Face, Work } from "@mui/icons-material";
 
 const styles = {
     chipSet: {
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
         flexWrap: "wrap",
-        listStyle: "none",
-        padding: 1.5,
-        margin: 0,
-    },
-    chipLabel: {
-        margin: 0.5,
-    },
-    fab: {
-        position: "fixed",
-        top: 50,
-        right: 2,
+        gap: 1,
+        padding: 2,
+        marginTop: 2,
+        backgroundColor: "#f5f5f5",
     },
 };
 
-const ActorDetails: React.FC<ActorDetailsProps> = (actor) => {
+interface TemplateActorPageProps {
+    actor: ActorDetailsProps;
+    children?: React.ReactElement;
+}
 
-    const [drawerOpen, setDrawerOpen] = useState(false);
-
+const ActorDetails: React.FC<TemplateActorPageProps> = ({ actor }) => {
     return (
         <>
-            <Typography variant="h5" component="h3">
-                Overview
+            <Typography variant="h4" gutterBottom>
+            Biography
             </Typography>
 
-            <Typography variant="h6" component="p">
-                {actor.name}
-            </Typography>
+            {actor.biography && (
+                <Typography variant="body1" paragraph>
+                    {actor.biography}
+                </Typography>
+            )}
 
-            <Paper component="ul" sx={styles.chipSet}>
-                <li>
-                    <Chip label="Genres" sx={styles.chipLabel} color="primary" />
-                </li>
-                {actor.genres.map((g) => (
-                    <li key={g.name}>
-                        <Chip label={g.name} />
-                    </li>
-                ))}
+            <Paper elevation={2} sx={styles.chipSet}>
+                <Chip icon={<Face />} label={actor.name} color="primary" />
+                {actor.birthday && <Chip icon={<Cake />} label={actor.birthday} />}
+                {actor.known_for_department && (
+                    <Chip icon={<Work />} label={actor.known_for_department} />
+                )}
             </Paper>
-            <Paper component="ul" sx={styles.chipSet}>
-                <Chip icon={<AccessTimeIcon />} label={`${actor.name} min.`} />
-                <Chip
-                    icon={<MonetizationIcon />}
-                    label={`${actor.name.toLocaleString()}`}
-                />
-                <Chip
-                    icon={<StarRate />}
-                    label={`${actor.name} (${actor.name}`}
-                />
-                <Chip label={`Released: ${actor.name}`} />
-            </Paper>
-            <Fab
-                color="secondary"
-                variant="extended"
-                onClick={() => setDrawerOpen(true)}
-                sx={styles.fab}
-            >
-                <NavigationIcon />
-                Reviews
-            </Fab>
-            <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-                {/* <MovieReviews {...actor} /> */}
-            </Drawer>
+
+            {actor.genres?.length > 0 && (
+                <Paper elevation={2} sx={styles.chipSet}>
+                    {actor.genres.map((genre) => (
+                        <Chip key={genre.id} label={genre.title} />
+                    ))}
+                </Paper>
+            )}
         </>
     );
 };
+
 export default ActorDetails;

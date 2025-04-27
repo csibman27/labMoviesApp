@@ -111,15 +111,16 @@ export interface BaseActorCardProps {
   popularity?: number; 
   profile_path?: string;
   biography?: string;
+  birthday?: string;
 }
 
 export interface ActorPageProps {
-  actor: ActorDetailsProps[];
+  actor: ActorDetailsProps;
 }
 
 
 export interface ActorDetailsProps extends BaseActorCardProps {
-  known_for: {
+  genres: {
     id: number;
     title: string;
   }[];

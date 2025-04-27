@@ -17,7 +17,7 @@ const MovieListPageTemplate: React.FC<BaseMovieListProps> = ({ movies, title, ac
         <Header title={title} />
       </Grid>
       <Grid item container spacing={5}>
-      <MovieList action={action} movies={movies} selectFavourite={function (movieId: number): void {
+      <MovieList action={action} movies={movies} selectFavourite={function (): void {
           throw new Error("Function not implemented.");
         } }></MovieList>
       </Grid>

@@ -7,6 +7,8 @@ import { getActorImages } from "../../api/tmdb-api";
 import { ActorDetailsProps } from "../../types/interfaces";
 import { useQuery } from "react-query";
 import Spinner from '../spinner';
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const styles = {
     gridListRoot: {
@@ -22,11 +24,11 @@ const styles = {
 
 interface TemplateActorPageProps {
     actor: ActorDetailsProps;
-    // children: React.ReactElement;
+    children: React.ReactElement;
 }
 
 
-const TemplateActorPage: React.FC<TemplateActorPageProps> = ({actor}) => {
+const TemplateActorPage: React.FC<TemplateActorPageProps> = ({actor, children}) => {
     const { data, error, isLoading, isError } = useQuery<Error>(
         ["actor_images", actor.id],
         () => getActorImages(actor.id.toString())
@@ -37,7 +39,7 @@ const TemplateActorPage: React.FC<TemplateActorPageProps> = ({actor}) => {
     }
 
     if (isError) {
-        return <h1>{(error).message}</h1>;
+        return <h1>{(error as Error).message}</h1>;
     }
 
     return (
@@ -63,8 +65,13 @@ const TemplateActorPage: React.FC<TemplateActorPageProps> = ({actor}) => {
                 </Grid>
 
                 <Grid item xs={9}>
-                    {/* {children} */}
-                <p>{actor.biography || 'Biography not available.'}</p>  
+                    {children}
+                {/* <p>{actor.biography || 'Biography not available.'}</p> */}
+                <Link to={`/movies/actor/${actor.id}/movies`}>
+                              <Button variant="contained" size="large" color="success">
+                                {actor.name}'s Movies ...
+                              </Button>
+                </Link>  
                 </Grid>
             </Grid>
         </>

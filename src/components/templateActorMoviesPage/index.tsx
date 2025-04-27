@@ -1,13 +1,13 @@
 import MovieHeader from "../headerMovie";
 import Grid from "@mui/material/Grid";
 import { getActorMovies } from "../../api/tmdb-api";
-import { CastDetailsProps, CreditsResponse } from "../../types/interfaces";
+import { BaseMovieProps, CreditsResponse } from "../../types/interfaces";
 import { useQuery } from "react-query";
 import Spinner from '../spinner';
 import { Link, useParams } from "react-router-dom";
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import img from '../../images/film-poster-placeholder.png';
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 
 const styles = {
     card: { maxWidth: 345 },
@@ -17,18 +17,20 @@ const styles = {
     },
   };
 
-interface TemplateCastPageProps {
-    cast: CastDetailsProps;
-    children: React.ReactElement;
+interface MoviePageProps1 {
+    movie: BaseMovieProps;
+    action: (m: BaseMovieProps) => React.ReactNode;
 }
 
 
-const TemplateActorMoviePage: React.FC<TemplateCastPageProps> = ({cast, children}) => {
+const TemplateActorMoviePage: React.FC<MoviePageProps1> = () => {
     const { id } = useParams();
     const { data: casts, error, isLoading, isError } = useQuery<CreditsResponse, Error>(
         ["actor_movies", id],
       ()=> getActorMovies(id||"")
       );
+  
+   
     
 
     if (isLoading) {
@@ -38,8 +40,6 @@ const TemplateActorMoviePage: React.FC<TemplateCastPageProps> = ({cast, children
     if (isError) {
         return <h1>{(error).message}</h1>;
     }
-
-    const m1 = cast ? cast.results : [];
 
     return (
         <>
@@ -67,6 +67,7 @@ const TemplateActorMoviePage: React.FC<TemplateCastPageProps> = ({cast, children
       {casts?.cast.map((movie) => (
         <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3} xl={2}>
           <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+
             <CardMedia
                     sx={styles.media}
                     image={
@@ -76,12 +77,17 @@ const TemplateActorMoviePage: React.FC<TemplateCastPageProps> = ({cast, children
                     }
                   />
             <CardContent sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" component="div">
+                        {movie.title}
+                      </Typography>
               <Typography variant="h6" component="div">
-                {movie.title}
+              <CalendarIcon fontSize="small" />
+                {movie.release_date}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 as {movie.character}
               </Typography>
+              
             </CardContent>
             <CardActions sx={{ marginTop: 'auto' }} disableSpacing>
               <Link to={`/movies/${movie.id}`} style={{ width: '100%' }}>
@@ -96,7 +102,7 @@ const TemplateActorMoviePage: React.FC<TemplateCastPageProps> = ({cast, children
     </Grid>
       
           <Grid container spacing={5} style={{ padding: "15px" }}>
-            <Grid item xs={12}>{children}</Grid>
+            {/* <Grid item xs={12}>{children}</Grid> */}
           </Grid>
         </>
       );

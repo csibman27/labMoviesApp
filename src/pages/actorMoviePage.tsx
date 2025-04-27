@@ -4,12 +4,13 @@ import { getActorMovies } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import { useParams } from "react-router-dom";
-import { ActorDetailsProps } from "../types/interfaces";
-
+import { CreditsResponse } from "../types/interfaces";
+import AddToFavouritesIcon from '../components/cardIcons/addToFavourites';
+import { BaseMovieProps } from "../types/interfaces";
 
 const ActorMoviePage: React.FC = () => {
   const { id } = useParams();
-  const { data: cast, error, isLoading, isError } = useQuery<ActorDetailsProps, Error>(
+  const { data: cast, error, isLoading, isError } = useQuery<CreditsResponse, Error>(
     ["actor movies", id],
   ()=> getActorMovies(id||"")
   );
@@ -28,11 +29,10 @@ const ActorMoviePage: React.FC = () => {
   return (
   
           <PageTemplate
-            title="Actor Movies Page"
             cast={cast}>
-              
-            
-    
+            action={(movie: BaseMovieProps) => {
+            return <AddToFavouritesIcon {...movie} />
+            }}
           </PageTemplate>
     
     // <p>This is the actors movie page</p>

@@ -4,8 +4,7 @@ import PageTemplate from "../components/templateActorPage";
 import { getActorsBio } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
-import { Link, useParams } from "react-router-dom";
-import Button from "@mui/material/Button";
+import { useParams } from "react-router-dom";
 import { ActorDetailsProps } from "../types/interfaces";
 
 const ActorBioPage: React.FC = () => {
@@ -29,12 +28,7 @@ const ActorBioPage: React.FC = () => {
       {actor ? (
         <>
           <PageTemplate actor={actor}>
-            <ActorDetails actor={actor} />
-            <Link to={`/movies/actor/${actor.id}/movies`}>
-              <Button variant="contained" size="large" color="success">
-                {actor.name}'s Movies ...
-              </Button>
-            </Link>
+            <ActorDetails actor={actor} children={undefined} />
           </PageTemplate>
         </>
       ) : (
