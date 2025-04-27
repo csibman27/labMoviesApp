@@ -166,7 +166,7 @@ export interface SeriesProps {
 
 export interface DiscoverSeries {
   page: number;	
-  total_pages: string;
+  total_pages: any;
   total_results: number;
   results: SeriesProps[];
 }

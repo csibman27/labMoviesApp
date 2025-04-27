@@ -4,13 +4,16 @@ import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
 import { BaseMovieProps } from "../../types/interfaces";
 
-export const titleFilter = (movie: BaseMovieProps, value: string): boolean => {
-    return movie.title.toLowerCase().search(value.toLowerCase()) !== -1;
+// Updated to support both movies (title) and series (name)
+export const titleFilter = (item: BaseMovieProps, value: string): boolean => {
+    const title = item.title || item.name || ""; // fallback if both undefined
+    return title.toLowerCase().includes(value.toLowerCase());
 };
 
-export const genreFilter = (movie: BaseMovieProps, value: string) => {
+// Updated to safely check genre_ids
+export const genreFilter = (item: BaseMovieProps, value: string): boolean => {
     const genreId = Number(value);
-    const genreIds = movie.genre_ids;
+    const genreIds = item.genre_ids;
     return genreId > 0 && genreIds ? genreIds.includes(genreId) : true;
 };
 
@@ -31,7 +34,6 @@ interface MovieFilterUIProps {
     titleFilter: string;
     genreFilter: string;
 }
-
 
 const MovieFilterUI: React.FC<MovieFilterUIProps> = ({ onFilterValuesChange, titleFilter, genreFilter }) => {
     const [drawerOpen, setDrawerOpen] = useState(false);
