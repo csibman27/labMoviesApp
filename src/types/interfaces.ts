@@ -82,7 +82,7 @@ export interface GenreData {
 
 export interface DiscoverMovies {
   page: number;	
-  total_pages: number;
+  total_pages: any;
   total_results: number;
   results: BaseMovieProps[];
 }
@@ -158,7 +158,7 @@ export interface SeriesProps {
 
 export interface DiscoverSeries {
   page: number;	
-  total_pages: number;
+  total_pages: string;
   total_results: number;
   results: SeriesProps[];
 }

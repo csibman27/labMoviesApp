@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PageTemplate from '../components/templateMovieListPage';
 import { BaseMovieProps } from "../types/interfaces";
 import { getUpcomingMovies } from "../api/tmdb-api";
@@ -25,7 +25,18 @@ const genreFiltering = {
 };
 
 const UpcomingPage: React.FC = () => {
-  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>("movie", getUpcomingMovies);
+  const [ currentPage, setCurrentPage ] = useState(1);
+  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>(["movie", { currentPage }],
+    ()=> getUpcomingMovies(currentPage),
+    {
+      keepPreviousData: true,
+    }
+  );
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage); 
+  };
+
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [titleFiltering, genreFiltering]
   );
@@ -48,6 +59,8 @@ const UpcomingPage: React.FC = () => {
   };
 
   const movies = data ? data.results : [];
+  const totalPages = data?.total_pages;
+  // console.log(totalPages)
   const displayedMovies = filterFunction(movies);
   // browser is already using the react-query library.
 
@@ -63,6 +76,9 @@ const UpcomingPage: React.FC = () => {
       <PageTemplate
         title="Upcoming Movies"
         movies={displayedMovies}
+        setCurrentPage={handlePageChange}
+        currentPage={currentPage}
+        totalPages={totalPages}
         action={(movie: BaseMovieProps) => {
           return (
             <>

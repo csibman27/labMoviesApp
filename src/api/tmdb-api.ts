@@ -27,9 +27,9 @@ export const getMovie = (id: string) => {
 };
 
 
-  export const getUpcomingMovies = () => {
+  export const getUpcomingMovies = (currentPage: number) => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=${currentPage}`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(`Failed to get upcoming movie data. Response status: ${response.status}`);
@@ -82,9 +82,9 @@ export const getMovie = (id: string) => {
   };
 
 
-  export const getPopularMovies = () => {
+  export const getPopularMovies = (currentPage: number) => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=${currentPage}`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(`Failed to get popular movie data. Response status: ${response.status}`);

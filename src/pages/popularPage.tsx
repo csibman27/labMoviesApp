@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PageTemplate from '../components/templateMovieListPage';
 import { BaseMovieProps } from "../types/interfaces";
 import { getPopularMovies } from "../api/tmdb-api";
@@ -25,7 +25,18 @@ const genreFiltering = {
 };
 
 const PopularPage: React.FC = () => {
-  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>("popular-movies", getPopularMovies);
+  const [ currentPage, setCurrentPage ] = useState(1);
+  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>(["popular-movies", { currentPage }],
+    ()=> getPopularMovies(currentPage),
+    {
+      keepPreviousData: true,
+    }
+  );
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage); 
+  };
+
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [titleFiltering, genreFiltering]
   );
@@ -48,6 +59,7 @@ const PopularPage: React.FC = () => {
   };
 
   const movies = data ? data.results : [];
+  const totalPages = data?.total_pages;
   const displayedMovies = filterFunction(movies);
 
   return (
@@ -55,6 +67,9 @@ const PopularPage: React.FC = () => {
       <PageTemplate
         title="Most Popular Movies"
         movies={displayedMovies}
+        setCurrentPage={handlePageChange}
+        currentPage={currentPage}
+        totalPages={totalPages}
         action={(movie: BaseMovieProps) => {
           return (
             <>
