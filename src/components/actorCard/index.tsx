@@ -5,9 +5,12 @@ import CardHeader from "@mui/material/CardHeader";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useContext } from "react";
 import img from '../../images/film-poster-placeholder.png';
 import { BaseActorProps } from "../../types/interfaces";
+import { MoviesContext } from "../../contexts/moviesContext";
+import { Avatar } from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const styles = {
     card: { maxWidth: 345 },
@@ -25,14 +28,22 @@ interface ActorCardProps {
 }
 
 const ActorCard: React.FC<ActorCardProps> = ({ actor, action }) => {
+  
+  const { favouriteActors } = useContext(MoviesContext);
+  const isFavourite = favouriteActors.find((a) => a.id === actor.id)? true : false;
 
   return (
     <Card sx={styles.card}>
       <CardHeader
-        sx={styles.avatar}
+        avatar={
+          isFavourite ? (
+            <Avatar sx={styles.avatar}>
+              <FavoriteIcon />
+            </Avatar>
+          ) : null
+        }
         title={
-          <Typography
-            variant="h5" component="p">
+          <Typography variant="h5" component="p">
             {actor.name}{" "}
           </Typography>
         }

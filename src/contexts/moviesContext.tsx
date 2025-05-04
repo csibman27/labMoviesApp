@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { BaseMovieProps, Review } from "../types/interfaces";
+import { BaseActorProps, BaseMovieProps, Review } from "../types/interfaces";
 
 
 
@@ -7,8 +7,13 @@ interface MovieContextInterface {
     favourites: number[];
     addToFavourites: ((movie: BaseMovieProps) => void);
     removeFromFavourites: ((movie: BaseMovieProps) => void);
+
     addReview: ((movie: BaseMovieProps, review: Review) => void);
     addMustWatch: ((movie: BaseMovieProps) => void);
+
+    favouriteActors: BaseActorProps[];
+    addActorToFavourites: (actor: BaseActorProps) => void;
+    removeActorFromFavourites: (actor: BaseActorProps) => void;
 }
 const initialContextState: MovieContextInterface = {
     favourites: [],
@@ -16,6 +21,9 @@ const initialContextState: MovieContextInterface = {
     removeFromFavourites: () => {},
     addReview: (movie, review) => { movie.id, review},
     addMustWatch: () => {},
+    favouriteActors: [],
+    addActorToFavourites: () => {},
+    removeActorFromFavourites: () => {},
 };
 
 export const MoviesContext = React.createContext<MovieContextInterface>(initialContextState);
@@ -29,13 +37,7 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) 
     const [favourites, setFavourites] = useState<number[]>([]);
     const [myReviews, setMyReviews] = useState<Review[]>( [] );
     const [mustWatch, setMustWatch] = useState<number[]>([]);
-    const [favouriteActors, setFavouriteActors] = useState<ActorType[]>([]);
-
-    const addActorToFavourites = (actor: ActorType) => {
-    if (!favouriteActors.find((a) => a.id === actor.id)) {
-        setFavouriteActors([...favouriteActors, actor]);
-    }
-    };
+    const [favouriteActors, setFavouriteActors] = useState<BaseActorProps[]>([]);
 
     // console.log("Must Watch Array", mustWatch);
 
@@ -48,7 +50,7 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) 
         });
     }, []);
 
-    const addReview = (movie:BaseMovieProps, review: Review) => {   // NEW
+    const addReview = (movie:BaseMovieProps, review: Review) => {
         setMyReviews( {...myReviews, [movie.id]: review } )
       };
 
@@ -65,6 +67,19 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) 
         });
     }, []);
 
+    const addActorToFavourites = (actor: BaseActorProps) => {
+        setFavouriteActors((prev) => {
+          if (!prev.find((a) => a.id === actor.id)) {
+            return [...prev, actor];
+          }
+          return prev;
+        });
+      };
+    
+      const removeActorFromFavourites = (actor: BaseActorProps) => {
+        setFavouriteActors((prev) => prev.filter((a) => a.id !== actor.id));
+      };
+
     return (
         <MoviesContext.Provider
             value={{
@@ -74,7 +89,8 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) 
                 addReview,
                 addMustWatch,
                 favouriteActors,
-                addActorToFavourites
+                addActorToFavourites,
+                removeActorFromFavourites,
             }}
         >
             {children}

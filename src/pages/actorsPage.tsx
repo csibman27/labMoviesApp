@@ -42,9 +42,9 @@ const ActorsPage: React.FC = () => {
         setCurrentPage={handlePageChange}
         currentPage={currentPage}
         totalPages={totalPages}
-        action={(actor) => {
+        action={(actor) => 
           <AddActorToFavourites {...actor} />
-        }}
+        }
       />
     </>
   );
