@@ -21,6 +21,7 @@ import FantasyPage from "./pages/myFantasyMoviePage";
 import LoginPage from "./pages/loginPage";
 import ProtectedRoute from "./routes/protectedRoute";
 import { AuthContextProvider } from './contexts/authContext';
+import FavouriteActorsPage from "./pages/favouriteActorsPage";
 
 
 const queryClient = new QueryClient({
@@ -58,6 +59,7 @@ const App = () => {
         <Route path="/movies/actors" element={<ActorsPage />} />
         <Route path="/movies/actors/:id" element={<ActorsBioPage/>} />
         <Route path="/movies/actor/:id/movies" element={<ActorMoviePage/>} />
+        <Route path="/movies/actors/favourites" element={<FavouriteActorsPage />} />
         <Route path="*" element={<Navigate to="/" />} />
         <Route path="/reviews/:id" element={<MovieReviewPage/>} />
         <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
