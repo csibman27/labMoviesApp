@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { LoginListProps } from '../../types/interfaces';
 import {
-    Box,
-    Button,
-    Container,
-    TextField,
-    Typography,
-    Alert,
-  } from '@mui/material';
+  Box,
+  Button,
+  Container,
+  TextField,
+  Typography,
+  Alert,
+} from '@mui/material';
 
 
 
@@ -25,7 +25,7 @@ const LoginForm: React.FC<LoginListProps> = ({ action }) => {
     }
 
     setError('');
-    action({ email, password });
+    action({ email, password }); // Call the passed 'action' function with email and password
   };
 
   return (

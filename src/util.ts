@@ -7,3 +7,21 @@ export const excerpt = (string: string) => {
     });
 }
 
+
+export const fakeAuth = async (email: string, password: string): Promise<string> => {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  const validUsers: Record<string, string> = {
+    "user1@1.com": "1234",
+    "tibor.molnar@waltoninstitute.ie": "changemenow",
+  };
+
+  if (validUsers[email] === password) {
+    return `${email}-token-xyz`;
+  }
+
+  throw new Error("Invalid email or password");
+};
+
+
+  
