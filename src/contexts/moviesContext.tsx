@@ -29,8 +29,15 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) 
     const [favourites, setFavourites] = useState<number[]>([]);
     const [myReviews, setMyReviews] = useState<Review[]>( [] );
     const [mustWatch, setMustWatch] = useState<number[]>([]);
+    const [favouriteActors, setFavouriteActors] = useState<ActorType[]>([]);
 
-    console.log("Must Watch Array", mustWatch);
+    const addActorToFavourites = (actor: ActorType) => {
+    if (!favouriteActors.find((a) => a.id === actor.id)) {
+        setFavouriteActors([...favouriteActors, actor]);
+    }
+    };
+
+    // console.log("Must Watch Array", mustWatch);
 
     const addToFavourites = useCallback((movie: BaseMovieProps) => {
         setFavourites((prevFavourites) => {
@@ -66,6 +73,8 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) 
                 removeFromFavourites,
                 addReview,
                 addMustWatch,
+                favouriteActors,
+                addActorToFavourites
             }}
         >
             {children}

@@ -4,6 +4,7 @@ import { getActors } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import { DiscoverActors } from "../types/interfaces";
+import AddActorToFavourites from "../components/cardIcons/addActorToFavourites";
 
 
 const ActorsPage: React.FC = () => {
@@ -42,7 +43,7 @@ const ActorsPage: React.FC = () => {
         currentPage={currentPage}
         totalPages={totalPages}
         action={(actor) => {
-          //console.log(actor)
+          <AddActorToFavourites {...actor} />
         }}
       />
     </>

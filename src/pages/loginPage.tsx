@@ -19,7 +19,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <PageTemplate
-          action={handleLogin} login={[]}  />
+          action={handleLogin} />
 
   );
 };

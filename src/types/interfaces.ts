@@ -273,13 +273,11 @@ export interface LoginFormProps {
 }
 
 export interface LoginListProps {
-  login: LoginFormProps[];
-  action: (l: LoginFormProps) => React.ReactNode;
+  action: (credentials: LoginFormProps) => void | Promise<void>;
 }
 
 
 // AUTH
-
 
 export interface AuthContextInterface {
   token: string | null;
