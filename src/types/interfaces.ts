@@ -264,3 +264,15 @@ export interface BaseFantasyMovieProps {
   production_countries?: string;
   genre_ids?: number[];
 }
+
+// LOGIN
+
+export interface LoginFormProps {
+  email: string;
+  password: string;
+}
+
+export interface LoginListProps {
+  login: LoginFormProps[];
+  action: (l: LoginFormProps) => React.ReactNode;
+}
