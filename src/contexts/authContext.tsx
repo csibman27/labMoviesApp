@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fakeAuth } from "../util";
 import { AuthContextInterface } from "../types/interfaces";
@@ -9,6 +9,13 @@ export const AuthContextProvider:React.FC<React.PropsWithChildren> = ({ children
     const [token, setToken] = useState<string | null>(null);
     const location = useLocation();
     const navigate = useNavigate();
+
+    useEffect(() => {
+      const storedToken = localStorage.getItem("authToken");
+      if (storedToken) {
+        setToken(storedToken);
+      }
+    }, []);
 
     const authenticate = async (email: string, password: string) => {
         try {

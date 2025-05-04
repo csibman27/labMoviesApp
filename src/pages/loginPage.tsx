@@ -1,12 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import PageTemplate from "../components/templateLoginPage";
-import { Typography } from "@mui/material";
 import { AuthContext } from "../contexts/authContext";
+import { LoginListProps } from "../types/interfaces";
 
 const LoginPage: React.FC = () => {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const authContext = useContext(AuthContext);
   const { authenticate } = authContext || {};
 
@@ -16,7 +14,6 @@ const LoginPage: React.FC = () => {
     } catch (error) {
       console.error("Login failed", error);
     }
-    return <Typography variant="h6">Welcome, {email}!</Typography>;
   };
   
 

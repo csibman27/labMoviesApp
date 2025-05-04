@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from "react";
+import React, { useState, MouseEvent, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -11,12 +11,14 @@ import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { AuthContext } from "../../contexts/authContext";
 
 const styles = {
     title: {
       flexGrow: 1,
     },
   };
+
 
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
@@ -26,6 +28,7 @@ const SiteHeader: React.FC = () => {
   const open = Boolean(anchorEl);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+  const { signout, token } = useContext(AuthContext)!;
 
   const menuOptions = [
     { label: "Home", path: "/" },
@@ -35,11 +38,15 @@ const SiteHeader: React.FC = () => {
     { label: "TV Series", path: "/movies/tvseries" },
     { label: "Fantasy", path: "/movies/fantasy" },
     { label: "Actors", path: "/movies/actors" },
-    { label: "Login", path: "/login" },
+    ...(token ? [{ label: "Logout", path: "/" }] : [])
   ];
 
-  const handleMenuSelect = (pageURL: string) => {
-    navigate(pageURL);
+  const handleMenuSelect = (pageURL: string, label: string) => {
+    if(label === "Logout") {
+      signout();
+    } else {
+      navigate(pageURL);
+    }
   };
 
   const handleMenu = (event: MouseEvent<HTMLButtonElement>) => {
@@ -86,7 +93,10 @@ const SiteHeader: React.FC = () => {
                 {menuOptions.map((opt) => (
                   <MenuItem
                     key={opt.label}
-                    onClick={() => handleMenuSelect(opt.path)}
+                    onClick={() => {
+                      setAnchorEl(null);
+                      handleMenuSelect(opt.path, opt.label);
+                    }}
                   >
                     {opt.label}
                   </MenuItem>
@@ -99,7 +109,7 @@ const SiteHeader: React.FC = () => {
                 <Button
                   key={opt.label}
                   color="inherit"
-                  onClick={() => handleMenuSelect(opt.path)}
+                  onClick={() => handleMenuSelect(opt.path, opt.label)}
                 >
                   {opt.label}
                 </Button>
