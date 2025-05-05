@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { ActorDetailsProps } from "../../types/interfaces";
 import { Cake, Face, Work } from "@mui/icons-material";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 
 const styles = {
     chipSet: {

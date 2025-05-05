@@ -3,11 +3,8 @@ import ActorCard from '../components/actorCard';
 import { MemoryRouter } from 'react-router';
 import MoviesContextProvider from '../contexts/moviesContext';
 import { action } from '@storybook/addon-actions';
-import React from 'react';
-import { BaseActorProps } from '../types/interfaces';
-import { SampleActor, sampleNoProfile } from './sampleActorData'; // Import sample data
+import { SampleActor, sampleNoProfile } from './sampleActorData';
 
-// Storybook metadata
 const meta = {
   title: 'Home Page/ActorCard',
   component: ActorCard,
@@ -21,7 +18,6 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-// Default card story
 export const Basic: Story = {
   args: {
     actor: SampleActor,
@@ -33,7 +29,6 @@ export const Basic: Story = {
 };
 Basic.storyName = 'Default';
 
-// Edge case: no profile image
 export const Exceptional: Story = {
   args: {
     actor: sampleNoProfile,
