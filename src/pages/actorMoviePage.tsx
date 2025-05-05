@@ -15,7 +15,6 @@ const ActorMoviePage: React.FC = () => {
   ()=> getActorMovies(id||"")
   );
 
-
   if (isLoading) {
     return <Spinner />;
   }
@@ -23,20 +22,15 @@ const ActorMoviePage: React.FC = () => {
   if (isError) {
     return <h1>{(error as Error).message}</h1>;
   }
-
-  // console.log(cast)
   
   return (
-  
-          <PageTemplate
-            cast={cast}>
-            action={(movie: BaseMovieProps) => {
-            return <AddToFavouritesIcon {...movie} />
-            }}
-          </PageTemplate>
-    
-    // <p>This is the actors movie page</p>
+    <PageTemplate
+      cast={cast}
+      action={(movie: BaseMovieProps) => {
+        return <AddToFavouritesIcon {...movie} />
+      }}
+    />
   );
-};
+};  
 
 export default ActorMoviePage;

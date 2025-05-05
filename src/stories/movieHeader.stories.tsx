@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router";
 
 import React from 'react';
 
-const meta = {
+const meta: Meta<typeof SampleMovie> = {
     title: "Movie Details Page/MovieHeader",
     component: MovieHeader,
     decorators: [

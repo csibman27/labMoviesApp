@@ -27,7 +27,7 @@ interface TemplateActorPageProps {
 
 
 const TemplateActorPage: React.FC<TemplateActorPageProps> = ({actor, children}) => {
-    const { data, error, isLoading, isError } = useQuery<Error>(
+    const { error, isLoading, isError } = useQuery<Error>(
         ["actor_images", actor.id],
         () => getActorImages(actor.id.toString())
     );

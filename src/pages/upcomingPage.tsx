@@ -82,12 +82,13 @@ const UpcomingPage: React.FC = () => {
         action={(movie: BaseMovieProps) => {
           return (
             <>
-            <AddToFavouritesIcon {...movie} />
-            <AddToPlaylistIcon {...movie} />
+              <AddToFavouritesIcon {...movie} />
+              <AddToPlaylistIcon {...movie} />
             </>
-          )
-        }}
-      />
+          );
+        } } selectFavourite={function (): void {
+          throw new Error("Function not implemented.");
+        } }      />
       <MovieFilterUI
         onFilterValuesChange={changeFilterValues}
         titleFilter={filterValues[0].value}

@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../headerFantasyMovieList";
 import Grid from "@mui/material/Grid";
 import MovieList from "../fantasyMovieList";
-import {  BaseMovieListProps } from "../../types/interfaces";
+import {  BaseFantasyMovieProps, BaseMovieListProps } from "../../types/interfaces";
 
 const styles = {
   root: { 
@@ -24,9 +24,12 @@ const MovieListPageTemplate: React.FC<BaseMovieListProps> = ({
         />
       </Grid>
       <Grid item container spacing={5}>
-      <MovieList action={action} movies={movies} selectFavourite={function (movieId: number): void {
+      <MovieList
+      action={action as (movie: BaseFantasyMovieProps) => JSX.Element}
+      movies={movies}
+      selectFavourite={() => {
           throw new Error("Function not implemented.");
-        } } />
+        }}/>
       </Grid>
     </Grid>
   );

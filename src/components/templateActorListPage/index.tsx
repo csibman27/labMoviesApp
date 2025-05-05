@@ -11,6 +11,7 @@ const styles = {
   };
 
 interface ActorListPageTemplateProps extends BaseActorListProps {
+  title: string;
   currentPage: number;
   setCurrentPage: (page: number) => void;
   totalPages: number;

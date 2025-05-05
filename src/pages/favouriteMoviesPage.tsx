@@ -71,14 +71,17 @@ const FavouriteMoviesPage: React.FC = () => {
               <WriteReview {...movie} />
             </>
           );
-        }}
-      />
+        } } currentPage={0} setCurrentPage={function (): void {
+          throw new Error("Function not implemented.");
+        } } totalPages={0} selectFavourite={function (): void {
+          throw new Error("Function not implemented.");
+        } }      />
 
       <MovieFilterUI
         onFilterValuesChange={changeFilterValues}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
-      />
+        languageFilter={""}      />
     </>
   );
 };

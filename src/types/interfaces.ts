@@ -19,6 +19,7 @@ export interface BaseMovieProps {
     favourite?: boolean;
     production_countries?: string;
     genre_ids?: number[];
+    name?: string;
   }
 
 export interface BaseActorProps {
@@ -26,12 +27,17 @@ export interface BaseActorProps {
    original_name?: string, 
    id: number,
    popularity: number,
-   profile_path: string,
+   profile_path?: string,
    gender: number,
-
+   known_for_department?: string,
+   birthday: string,
+   biography: string,
+   awards: string,
+   imdb_id: number,
 }
 
 export interface BaseMovieListProps {
+  title: string,
   movies: BaseMovieProps[];
   selectFavourite: (movieId: number) => void;
 }
@@ -107,7 +113,7 @@ export interface BaseActorCardProps {
   id: number;
   name: string;
   gender?: number;
-  known_for_department?: String;
+  known_for_department?: string;
   popularity?: number; 
   profile_path?: string;
   biography?: string;

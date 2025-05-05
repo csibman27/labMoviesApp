@@ -8,6 +8,7 @@ import { Link, useParams } from "react-router-dom";
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import img from '../../images/film-poster-placeholder.png';
 import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
+//import { ReactNode } from "react";
 
 const styles = {
     card: { maxWidth: 345 },
@@ -18,8 +19,10 @@ const styles = {
   };
 
 interface MoviePageProps1 {
-    movie: BaseMovieProps;
+    cast: CreditsResponse | undefined;
+    movie?: BaseMovieProps;
     action: (m: BaseMovieProps) => React.ReactNode;
+    // children?: ReactNode;
 }
 
 

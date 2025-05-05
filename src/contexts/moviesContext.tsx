@@ -39,7 +39,7 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) 
     const [mustWatch, setMustWatch] = useState<number[]>([]);
     const [favouriteActors, setFavouriteActors] = useState<BaseActorProps[]>([]);
 
-    // console.log("Must Watch Array", mustWatch);
+    console.log("Must Watch Array: ", mustWatch);
 
     const addToFavourites = useCallback((movie: BaseMovieProps) => {
         setFavourites((prevFavourites) => {

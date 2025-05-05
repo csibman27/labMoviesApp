@@ -26,8 +26,9 @@ const FantasyPage: React.FC = () => {
       <PageTemplate
         title="Fantasy Movies"
         movies={movies}
-        action={(movie) => <></>}
-      />
+        action={() => <></>} selectFavourite={function (): void {
+          throw new Error("Function not implemented.");
+        } }      />
     </Box>
   );
 }

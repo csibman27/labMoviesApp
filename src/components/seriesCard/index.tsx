@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -28,11 +28,6 @@ interface SeriesCardProps  {
 }
 
 const SeriesCard: React.FC<SeriesCardProps> = ({series, action}) => {
-  // const { favourites } = useContext(MoviesContext);
-
-  // const isFavourite = favourites.find((id) => id === movie.id)? true : false;
-
- 
 
   return (
     <Card sx={styles.card}>

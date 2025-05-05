@@ -3,8 +3,8 @@ import { BaseActorProps } from '../types/interfaces';
 export const SampleActor: BaseActorProps = {
   id: 101,
   name: 'John Doe',
-  profile_path: '/path_to_profile_image.jpg', // Replace with a real path or mock image
-  gender: 2,  // 1 for female, 2 for male
+  profile_path: '/path_to_profile_image.jpg',
+  gender: 2,
   popularity: 100,
   known_for_department: 'Acting',
   biography: 'John Doe is a well-known actor with a career spanning decades.',

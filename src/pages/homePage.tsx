@@ -76,8 +76,9 @@ const HomePage: React.FC = () => {
         currentPage={currentPage}
         totalPages={totalPages}
         movies={displayedMovies}
-        action={(movie: BaseMovieProps) => <AddToFavouritesIcon {...movie} />}
-      />
+        action={(movie: BaseMovieProps) => <AddToFavouritesIcon {...movie} />} selectFavourite={function (): void {
+          throw new Error("Function not implemented.");
+        } }      />
       <MovieFilterUI
         onFilterValuesChange={changeFilterValues}
         titleFilter={filterValues[0].value}

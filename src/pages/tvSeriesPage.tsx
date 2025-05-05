@@ -3,7 +3,7 @@ import PageTemplate from '../components/templateSeriesListPage';
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import { getTVSeries } from "../api/tmdb-api";
-import { DiscoverSeries, SeriesProps } from "../types/interfaces";
+import { DiscoverSeries } from "../types/interfaces";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
@@ -74,10 +74,9 @@ const TvSeriesPage: React.FC = () => {
         setCurrentPage={handlePageChange}
         currentPage={currentPage}
         totalPages={totalPages}
-        action={(series: SeriesProps) => {
-            null
-        }}
-      />
+        action={() => {
+          return null;
+        } } id={0} name={""} poster_path={null} overview={""} first_air_date={""} vote_average={0} vote_count={0} revenue={0} runtime={0} homepage={undefined} tagline={""}      />
       <MovieFilterUI
         onFilterValuesChange={changeFilterValues}
         titleFilter={filterValues[0].value}
