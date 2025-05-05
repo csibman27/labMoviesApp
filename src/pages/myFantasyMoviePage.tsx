@@ -3,6 +3,7 @@ import PageTemplate from "../components/templateFantasyMovieListPage";
 import { fantasyMovies } from "../seed/fantasyMovies";
 import MovieForm from "../components/fantasyMovieForm";
 import { BaseFantasyMovieProps } from "../types/interfaces";
+import { Box, Typography } from "@mui/material";
 
 const FantasyPage: React.FC = () => {
   const [movies, setMovies] = useState<BaseFantasyMovieProps[]>(fantasyMovies);
@@ -13,17 +14,23 @@ const FantasyPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Fantasy Movies</h1>
-      <MovieForm onSubmit={handleAddMovie} />  {/* Form to add new movie */}
+    <Box>
+      <Box textAlign="center" my={4}>
+        <Typography variant="h4" component="h1">
+          Fantasy Movies Form
+        </Typography>
+      </Box>
+  
+      <MovieForm onSubmit={handleAddMovie} />
+  
       <PageTemplate
         title="Fantasy Movies"
         movies={movies}
         action={(movie) => <></>}
       />
-    </div>
+    </Box>
   );
-};
+}
 
 export default FantasyPage;
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BaseFantasyMovieProps } from "../../types/interfaces";
+import { Box, Button, Stack, TextField } from "@mui/material";
 
 interface MovieFormProps {
   onSubmit: (movie: BaseFantasyMovieProps) => void;
@@ -17,87 +18,86 @@ const MovieForm: React.FC<MovieFormProps> = ({ onSubmit }) => {
     e.preventDefault();
 
     const newMovie: BaseFantasyMovieProps = {
-        id: Date.now(), // Unique ID based on timestamp
+        id: Date.now(),
         title,
         release_date: releaseDate,
         vote_average: voteAverage,
         overview,
         poster_path: posterPath,
         budget,
-        imdb_id: "", // can be empty
-        original_language: "en", // eng by default
+        imdb_id: "",
+        original_language: "en", 
         tagline: "",
-        runtime: 120, // fix runtime
+        runtime: 120,
         revenue: 0,
         vote_count: 0,
         popularity: 0,
         favourite: false,
-        production_countries: "USA", // fix county
-        genre_ids: [14] // fantasy genre by default
+        production_countries: "USA", 
+        genre_ids: [14] 
         ,
         homepage: undefined
     };
 
-    onSubmit(newMovie);  // pass new movie to the parent component
+    onSubmit(newMovie);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="title">Title:</label>
-        <input 
-          type="text" 
-          id="title" 
-          value={title} 
-          onChange={(e) => setTitle(e.target.value)} 
+    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 600, mx: 'auto' }}>
+      <Stack spacing={3}>
+        <TextField
+          label="Title"
+          variant="outlined"
+          fullWidth
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
-      </div>
-      <div>
-        <label htmlFor="releaseDate">Release Date:</label>
-        <input 
-          type="date" 
-          id="releaseDate" 
-          value={releaseDate} 
-          onChange={(e) => setReleaseDate(e.target.value)} 
+        <TextField
+          label="Release Date"
+          type="date"
+          InputLabelProps={{ shrink: true }}
+          variant="outlined"
+          fullWidth
+          value={releaseDate}
+          onChange={(e) => setReleaseDate(e.target.value)}
         />
-      </div>
-      <div>
-        <label htmlFor="voteAverage">Vote Average:</label>
-        <input 
-          type="number" 
-          id="voteAverage" 
-          value={voteAverage} 
-          onChange={(e) => setVoteAverage(Number(e.target.value))} 
+        <TextField
+          label="Vote Average"
+          type="number"
+          variant="outlined"
+          fullWidth
+          value={voteAverage}
+          onChange={(e) => setVoteAverage(Number(e.target.value))}
         />
-      </div>
-      <div>
-        <label htmlFor="overview">Overview:</label>
-        <textarea 
-          id="overview" 
-          value={overview} 
-          onChange={(e) => setOverview(e.target.value)} 
+        <TextField
+          label="Overview"
+          multiline
+          rows={4}
+          variant="outlined"
+          fullWidth
+          value={overview}
+          onChange={(e) => setOverview(e.target.value)}
         />
-      </div>
-      <div>
-        <label htmlFor="posterPath">Poster Path (URL):</label>
-        <input 
-          type="text" 
-          id="posterPath" 
-          value={posterPath} 
-          onChange={(e) => setPosterPath(e.target.value)} 
+        <TextField
+          label="Poster Path (URL)"
+          variant="outlined"
+          fullWidth
+          value={posterPath}
+          onChange={(e) => setPosterPath(e.target.value)}
         />
-      </div>
-      <div>
-        <label htmlFor="budget">Budget:</label>
-        <input 
-          type="number" 
-          id="budget" 
-          value={budget} 
-          onChange={(e) => setBudget(Number(e.target.value))} 
+        <TextField
+          label="Budget"
+          type="number"
+          variant="outlined"
+          fullWidth
+          value={budget}
+          onChange={(e) => setBudget(Number(e.target.value))}
         />
-      </div>
-      <button type="submit">Add Movie</button>
-    </form>
+        <Button variant="contained" color="primary" type="submit">
+          Add Movie
+        </Button>
+      </Stack>
+    </Box>
   );
 };
 
