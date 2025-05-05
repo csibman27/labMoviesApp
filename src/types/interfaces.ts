@@ -147,7 +147,7 @@ export interface ActorImage {
   profile_path?: string;
 }
 
-export type BaseActorProps = BaseActorCardProps;
+//export type BaseActorProps = BaseActorCardProps;
 
 
 // SERIES

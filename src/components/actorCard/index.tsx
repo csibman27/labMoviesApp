@@ -60,12 +60,12 @@ const ActorCard: React.FC<ActorCardProps> = ({ actor, action }) => {
       <CardActions disableSpacing>
         {action && action(actor)}
         <Link to={`/movies/actors/${actor.id}`}>
-          <Button variant="outlined" size="medium" color="primary">
+          <Button variant="outlined" size="small" color="primary">
             Actor Bio
           </Button>
         </Link>
         <Link to={`/movies/actor/${actor.id}/movies`}>
-          <Button variant="outlined" size="medium" color="primary">
+          <Button variant="outlined" size="small" color="primary">
             Actor Movies
           </Button>
         </Link>
