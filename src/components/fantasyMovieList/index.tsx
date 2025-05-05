@@ -9,7 +9,7 @@ interface MovieListProps {
   selectFavourite: (movieId: number) => void;
 }
 
-const MovieList: React.FC<MovieListProps> = ({ movies, action = () => <></>, selectFavourite }) => {
+const MovieList: React.FC<MovieListProps> = ({ movies, action = () => <></> }) => {
   return (
     <>
       {movies.map((m) => (

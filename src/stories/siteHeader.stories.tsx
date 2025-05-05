@@ -2,16 +2,16 @@ import React from "react";
 import SiteHeader from "../components/siteHeader";
 import { MemoryRouter } from "react-router";
 import type { Meta, StoryObj } from "@storybook/react";
+import { AuthContext } from "../contexts/authContext";
 
-// 🧠 Import your context (adjust the path to where your AuthContext is defined)
-import { AuthContext } from "../contexts/authContext"; // <-- Update this path if needed
-
-// ✅ Define a mock context value
 const mockAuthContextValue = {
+  token: "moc-token",
   signout: () => {
     console.log("Mock signout called");
   },
-  // Add other values your component expects from the context
+  authenticate: async (username: string, password: string) => {
+    console.log(`Mock authenticate called with ${username} / ${password}`);
+  },
 };
 
 const meta = {

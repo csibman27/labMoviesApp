@@ -21,6 +21,7 @@ const styles = {
 
 interface MovieCardProps {
   movie: BaseFantasyMovieProps;
+  action?: JSX.Element;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
