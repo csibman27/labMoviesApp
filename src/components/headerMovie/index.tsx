@@ -6,8 +6,8 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import HomeIcon from "@mui/icons-material/Home";
 import { MovieDetailsProps } from "../../types/interfaces";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import Avatar from "@mui/material/Avatar";
+// import FavoriteIcon from "@mui/icons-material/Favorite";
+// import Avatar from "@mui/material/Avatar";
 
 const styles = {
     root: {  
@@ -46,11 +46,11 @@ const MovieHeader: React.FC<MovieHeaderProps> = ({ title, homepage, tagline, cus
         <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>
 
-      {isFavourite && (
+      {/* {isFavourite && (
         <Avatar sx={styles.avatar}>
           <FavoriteIcon />
         </Avatar>
-      )}
+      )} */}
 
       <Typography variant="h4" component="h3">
         {customTitle ?? title}{"   "}

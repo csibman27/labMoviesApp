@@ -1,32 +1,50 @@
 # React + TypeScript + Vite
 
-## Assignment 2
+# Enterprise web development - Assignment 2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+__Name:__ Tibor Molnar
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
++ **UI List Views**
+    + Movies home page
+    + Upcomming
+    + Most Popular
+    + Actors
+    + TV Series
+    + Fantasy
 
-## Expanding the ESLint configuration
++ **Detail view**
+    + Movies detailed view with overview, genres, runtime, rate, profit, released - private route
+    + Upcoming detailed view with overview, genres, runtime, rate, profit, released - private route
+    + Most popular detailed view with overview, genres, runtime, rate, profit, released - private route
+    + Actors with multiple detailed views, Actor Bio and Actor Movies.
+    + TV Series detailed view with overview, genres, rate, runtime, languages, original name, last air date - private route
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
++ **Routing - New routes**
 
-- Configure the top-level `parserOptions` property like this:
++ **At least one additional parameterised URL**
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
++ **Extensive Data hyperlinking**
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
++ **Paginations on all main pages**
+
++ **Private and public routes**
+
++ **Filtering to all movie pages and tv series**
+
++ **Favourite Actors page**
+
++ **Storybook support**
+
++ **Additional data entity type, e.g. Actor, TV series**
+
++ **Server state Caching**
+
++ **Additional filtering**
+
++ **My fantasy movie - advanced**
+
++ **Frontend deployment to AWS using CloudFront secured**
+
++ **Use of MUI elements in whole project**
