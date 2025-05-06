@@ -10,13 +10,14 @@ __Name:__ Tibor Molnar
 
 ### 🖥️ UI List Views 🎬
 
-  - **Movies**
-  - **Home Page**
+  - **Movies Home Page**
   - **Upcoming**
   - **Most Popular**
   - **Actors**
   - **TV Series**
-  - **Fantasy Picks**
+  - **Favourite Movies**
+  - **Favourite Actors**
+  - **Fantasy Movies**
 
 ---
 
